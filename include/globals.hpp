@@ -10,5 +10,5 @@
 #define catapultPort 1
 #define rotationPort 12
 #define expansionPort 'A'
-#define intakeSpeed -105
+#define intakeSpeed -127
 #endif
