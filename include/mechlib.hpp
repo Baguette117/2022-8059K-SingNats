@@ -8,8 +8,4 @@ bool isError();
 // double errorRight
 
 void catapultPID(void* ignore);
-/**
- *balls
- * @param ba b
-*/
 void catapultShoot();
