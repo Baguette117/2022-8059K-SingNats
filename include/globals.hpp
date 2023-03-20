@@ -10,5 +10,9 @@
 #define catapultPort 1
 #define rotationPort 12
 #define expansionPort 'A'
+#define leftEncT 'C'
+#define leftEncB 'D'
+#define rightEncT 'E'
+#define rightEncB 'F'
 #define intakeSpeed -127
 #endif
