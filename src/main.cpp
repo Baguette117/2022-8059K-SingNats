@@ -1,4 +1,6 @@
 #include "main.h"
+#include "globals.hpp"
+#include "pros/adi.hpp"
 
 /**
  * A callback function for LLEMU's center button.
@@ -22,8 +24,8 @@ void initialize() {
 	Motor rightBack(rightBackPort, E_MOTOR_GEAR_GREEN, true, E_MOTOR_ENCODER_DEGREES);
 	Motor feedLeft(feedLeftPort,  E_MOTOR_GEAR_BLUE, false, E_MOTOR_ENCODER_DEGREES);
 	Motor feedRight(feedRightPort,  E_MOTOR_GEAR_BLUE, true, E_MOTOR_ENCODER_DEGREES);
-	// Motor catapult(catapultPort,  E_MOTOR_GEAR_RED, false, E_MOTOR_ENCODER_DEGREES);
-	// Motor catapultRight(catapultRightPort,  E_MOTOR_GEAR_RED, false, E_MOTOR_ENCODER_DEGREES);
+	ADIEncoder leftEnc(leftEncT, leftEncB, false);
+	ADIEncoder rightEnc(rightEncT, rightEncB, true);
 	ADIDigitalOut expansion (expansionPort, LOW);
 	Controller master (CONTROLLER_MASTER);
 

@@ -5,7 +5,8 @@ Motor rightFM(rightFMPort, E_MOTOR_GEAR_GREEN, true, E_MOTOR_ENCODER_DEGREES);
 Motor rightBack(rightBackPort, E_MOTOR_GEAR_GREEN, true, E_MOTOR_ENCODER_DEGREES);
 Motor feedLeft(feedLeftPort,  E_MOTOR_GEAR_BLUE, false, E_MOTOR_ENCODER_DEGREES);
 Motor feedRight(feedRightPort,  E_MOTOR_GEAR_BLUE, true, E_MOTOR_ENCODER_DEGREES);
-// Motor catapultLeft(catapultLeftPort,  E_MOTOR_GEAR_RED, false, E_MOTOR_ENCODER_DEGREES);
+ADIEncoder leftEnc(leftEncT, leftEncB, false);
+ADIEncoder rightEnc(rightEncT, rightEncB, true);
 Motor catapult(catapultPort,  E_MOTOR_GEAR_RED, true, E_MOTOR_ENCODER_DEGREES);
 
 double targLeft, targRight, posLeft, posRight, prevPosLeft, prevPosRight, errorLeft, errorRight, prevErrorLeft, prevErrorRight, integLeft = 0, integRight = 0, derivLeft, derivRight, leftSpeed, rightSpeed;
@@ -21,22 +22,16 @@ bool targReach, voltControl = false;
 
 
 void autonPID(void* ignore){
-  leftFM.tare_position();
-  leftBack.tare_position();
-  rightFM.tare_position();
-  rightBack.tare_position();
-  feedLeft.tare_position();
-  feedRight.tare_position();
-  // catapultLeft.tare_position();
-  catapult.tare_position();
+  leftEnc.reset();
+  rightEnc.reset();
 
   while (true /*&& competition::is_autonomous()*/) {
     if (voltControl){
       // printf("Voltage control\n");
       delay(20);
     } else {
-      posLeft = leftFM.get_position();
-      posRight = rightFM.get_position();
+      posLeft = leftEnc.get_value();
+      posRight = rightEnc.get_value();
 
       errorLeft = targLeft - posLeft; //Should I get avg of leftFM and leftBack instead
       errorRight = targRight - posRight; //Same here
